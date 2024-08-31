@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
+import 'package:passwordmanager/providers/authProvider.dart';
+import 'package:provider/provider.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // AuthController authController = Get.put(AuthController());
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -51,11 +55,17 @@ class AuthPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                PrimaryButton(
-                  title: "Log In",
-                  icon: IconsAssets.lock,
-                  ontap: () {},
-                ),
+                Consumer<AuthProvider>(builder: (context, value, child) {
+                  return value.isLoading.value
+                      ? CircularProgressIndicator()
+                      : PrimaryButton(
+                          title: "Log In",
+                          icon: IconsAssets.lock,
+                          ontap: () {
+                            authProvider.login(context);
+                          },
+                        );
+                })
               ],
             )
           ],

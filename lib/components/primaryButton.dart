@@ -13,27 +13,30 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(5),
-        color: Theme.of(context).colorScheme.primary,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            icon,
-            color: Theme.of(context).colorScheme.primaryContainer,
-          ),
-          SizedBox(width: 10),
-          Text(
-            title,
-            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
-          ),
-        ],
+    return InkWell(
+      onTap: ontap,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: Theme.of(context).colorScheme.primary,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              icon,
+              color: Theme.of(context).colorScheme.primaryContainer,
+            ),
+            SizedBox(width: 10),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
+            ),
+          ],
+        ),
       ),
     );
   }
