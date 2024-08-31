@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:passwordmanager/configs/responsiveLayout.dart';
 import 'package:passwordmanager/pages/homePage/widgets/passwordTile.dart';
 
@@ -9,6 +10,13 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDesktop = Responsive.isDesktop(context);
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          onPressed: () {
+            Get.toNamed("/add-new-password");
+          },
+          child: Icon(Icons.add),
+        ),
         appBar: AppBar(
           title: const Text('Password Page'),
         ),
