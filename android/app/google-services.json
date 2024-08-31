@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1944382428",
+    "project_id": "nextpass-3be78",
+    "storage_bucket": "nextpass-3be78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1944382428:android:42869065b4d67d1134bd19",
+        "android_client_info": {
+          "package_name": "com.e"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEt-_LLHOId8WlnOi0CFkFGhTm0tODvFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1944382428:android:1d263af3242163ce34bd19",
+        "android_client_info": {
+          "package_name": "com.example.passwordmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEt-_LLHOId8WlnOi0CFkFGhTm0tODvFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
