@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:passwordmanager/configs/themes.dart';
 import 'package:passwordmanager/pages/auth/authPage.dart';
 import 'package:passwordmanager/pages/homePage/homePage.dart';
+import 'package:passwordmanager/pages/splacePage/splacePage.dart';
 
 import 'firebase_options.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'Password Manager',
       theme: lightTheme,
       themeMode: ThemeMode.system,
-      home: AuthPage(),
+      home: SplacePage(),
     );
   }
 }
