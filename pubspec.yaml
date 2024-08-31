@@ -38,6 +38,9 @@ dependencies:
   toastification:
   go_router:
   firebase_core: ^3.4.0
+  flutter_svg: ^2.0.10+1
+  get: ^4.6.6
+  firebase_auth: ^5.2.0
 
 dev_dependencies:
   flutter_test:
@@ -64,7 +67,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icons/
-    - assets/images/
+    # - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -24,6 +24,12 @@ var lightTheme = ThemeData(
         fontWeight: FontWeight.w500,
         color: onBackgroundColor,
       ),
+      headlineLarge: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: onBackgroundColor,
+      ),
       bodyMedium: TextStyle(
         fontFamily: "Poppins",
         fontSize: 14,
