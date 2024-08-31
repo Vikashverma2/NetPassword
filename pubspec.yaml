@@ -43,6 +43,7 @@ dependencies:
   firebase_auth: ^5.2.0
   google_sign_in: ^6.2.1
   lottie: ^3.1.2
+  maths: ^0.0.2
 
 dev_dependencies:
   flutter_test:

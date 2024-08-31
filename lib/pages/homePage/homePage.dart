@@ -13,11 +13,23 @@ class Homepage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).colorScheme.primary,
           onPressed: () {
-            Get.toNamed("/add-new-password");
+            Get.toNamed("/addnewpassword");
           },
-          child: Icon(Icons.add),
+          child: Icon(
+            Icons.add,
+            color: Theme.of(context).colorScheme.primaryContainer,
+            size: 30,
+          ),
         ),
         appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.toNamed("/demo");
+              },
+              icon: Icon(Icons.pages),
+            )
+          ],
           title: const Text('Password Page'),
         ),
         body: Padding(

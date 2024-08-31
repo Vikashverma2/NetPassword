@@ -11,6 +11,19 @@ var lightTheme = ThemeData(
       primaryContainer: primaryContainerColor,
       onPrimaryContainer: onPrimaryContainerColor,
     ),
+    inputDecorationTheme: const InputDecorationTheme(
+        fillColor: lightBlueColor,
+        filled: true,
+        border: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: primaryColor,
+            width: 1,
+          ),
+        ),
+        hintStyle: TextStyle(
+          fontSize: 15,
+          color: Colors.grey,
+        )),
     textTheme: const TextTheme(
       headlineMedium: TextStyle(
         fontFamily: "Poppins",
@@ -45,6 +58,18 @@ var lightTheme = ThemeData(
       labelMedium: TextStyle(
         fontFamily: "Poppins",
         fontSize: 10,
+        fontWeight: FontWeight.w400,
+        color: onPrimaryContainerColor,
+      ),
+      labelLarge: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 15,
+        fontWeight: FontWeight.w400,
+        color: onPrimaryContainerColor,
+      ),
+      labelSmall: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 13,
         fontWeight: FontWeight.w400,
         color: onPrimaryContainerColor,
       ),
