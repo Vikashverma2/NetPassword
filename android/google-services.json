@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1944382428",
+    "project_id": "nextpass-3be78",
+    "storage_bucket": "nextpass-3be78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1944382428:android:1d263af3242163ce34bd19",
+        "android_client_info": {
+          "package_name": "com.example.passwordmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1944382428-lbhvd83f76prp0oj4a00ou2re4uittpo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.passwordmanager",
+            "certificate_hash": "78376ed6e7149ac27155448eb1979bfc705c6e49"
+          }
+        },
+        {
+          "client_id": "1944382428-e0sg20im4a9fvv0bbg20mclhq24fotaa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEt-_LLHOId8WlnOi0CFkFGhTm0tODvFA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1944382428-e0sg20im4a9fvv0bbg20mclhq24fotaa.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1944382428-77clqf5tbosn4k435pl55u5v6q33qplb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.passwordmanager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

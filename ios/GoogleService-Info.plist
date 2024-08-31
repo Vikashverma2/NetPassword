@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1944382428-77clqf5tbosn4k435pl55u5v6q33qplb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1944382428-77clqf5tbosn4k435pl55u5v6q33qplb</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1944382428-lbhvd83f76prp0oj4a00ou2re4uittpo.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCWrOR9YWrn7u6pLA0zhQlUWZD3Uw-taaQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1944382428</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.passwordmanager</string>
+	<key>PROJECT_ID</key>
+	<string>nextpass-3be78</string>
+	<key>STORAGE_BUCKET</key>
+	<string>nextpass-3be78.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1944382428:ios:f8824762c9c472d534bd19</string>
+</dict>
+</plist>
