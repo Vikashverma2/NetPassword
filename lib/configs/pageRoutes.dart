@@ -1,27 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:passwordmanager/pages/auth/authPage.dart';
-import 'package:passwordmanager/pages/homePage/homePage.dart';
+import 'package:get/get.dart';
+import 'package:passwordmanager/pages/splacePage/splacePage.dart';
 
-final GoRouter router = GoRouter(
-  routes: [
-    GoRoute(
-      path: '/splace',
-      builder: (BuildContext context, GoRouterState state) {
-        return const Homepage();
-      },
-    ),
-    GoRoute(
-      path: '/home',
-      builder: (BuildContext context, GoRouterState state) {
-        return const Homepage();
-      },
-    ),
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const AuthPage();
-      },
-    ),
-  ],
-);
+import '../pages/auth/authPage.dart';
+import '../pages/homePage/homePage.dart';
+
+var pages = [
+  GetPage(
+    name: "/",
+    page: () => SplacePage(),
+  ),
+  GetPage(
+    name: "/home",
+    page: () => Homepage(),
+  ),
+  GetPage(
+    name: "/auth",
+    page: () => AuthPage(),
+  ),
+];

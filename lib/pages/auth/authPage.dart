@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
 import 'package:passwordmanager/providers/authProvider.dart';
-import 'package:provider/provider.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // AuthController authController = Get.put(AuthController());
-    final authProvider = Provider.of<AuthProvider>(context);
+    AuthController authController = Get.put(AuthController());
+
     return Scaffold(
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(40),
         child: Column(
@@ -22,18 +23,19 @@ class AuthPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 250,
-                  height: 250,
-                  padding: EdgeInsets.all(50),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(80),
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                  child: SvgPicture.asset(
-                    IconsAssets.logo,
-                  ),
-                ),
+                Lottie.asset(AnimationAssets.lockAuth, width: 300)
+                // Container(
+                //   width: 250,
+                //   height: 250,
+                //   padding: EdgeInsets.all(50),
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(80),
+                //     color: Theme.of(context).colorScheme.primary,
+                //   ),
+                //   child: SvgPicture.asset(
+                //     IconsAssets.logo,
+                //   ),
+                // ),
               ],
             ),
             SizedBox(height: 70),
@@ -55,17 +57,15 @@ class AuthPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Consumer<AuthProvider>(builder: (context, value, child) {
-                  return value.isLoading.value
-                      ? CircularProgressIndicator()
-                      : PrimaryButton(
-                          title: "Log In",
-                          icon: IconsAssets.lock,
-                          ontap: () {
-                            authProvider.login(context);
-                          },
-                        );
-                })
+                Obx(() => authController.isLoading.value
+                    ? CircularProgressIndicator()
+                    : PrimaryButton(
+                        title: "Log In",
+                        icon: IconsAssets.lock,
+                        ontap: () {
+                          authController.login();
+                        },
+                      ))
               ],
             )
           ],
