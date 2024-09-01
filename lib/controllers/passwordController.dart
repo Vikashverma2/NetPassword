@@ -28,7 +28,6 @@ class PasswordController extends GetxController {
           title.isNotEmpty &&
           userName.isNotEmpty &&
           password.isNotEmpty) {
-        // Create a new Credential instance
         Credential newCredential = Credential(
           id: id,
           address: address,
@@ -40,7 +39,6 @@ class PasswordController extends GetxController {
           createdAt: DateTime.now().toUtc().toString(),
           siteLogo: siteLogo,
         );
-        // Save to Firestore
         await db
             .collection("users")
             .doc(auth.currentUser!.uid)
@@ -50,17 +48,25 @@ class PasswordController extends GetxController {
         print("Password added successfully");
         return true;
       } else {
-        // Handle case where required fields are empty
         print("One or more fields are empty");
         return false;
       }
     } catch (e) {
-      // Handle and log the error
       print("Error adding password: $e");
       return false;
     } finally {
-      // Ensure loading state is reset
       isLoading.value = false;
     }
+  }
+
+  Stream<List<Credential>> getCredentialAsync() {
+    return db
+        .collection("users")
+        .doc(auth.currentUser!.uid)
+        .collection("credentials")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => Credential.fromJson(doc.data()))
+            .toList());
   }
 }

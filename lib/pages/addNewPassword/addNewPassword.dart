@@ -7,7 +7,6 @@ import 'package:passwordmanager/actions/generatePassword.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
 import 'package:passwordmanager/components/secondryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
-import 'package:passwordmanager/configs/colors.dart';
 import 'package:passwordmanager/actions/getIconAsPerPwd.dart';
 import 'package:passwordmanager/actions/passwordStrenth.dart';
 import 'package:passwordmanager/controllers/passwordController.dart';
@@ -60,7 +59,6 @@ class AddNewPasswordPage extends StatelessWidget {
                     child: Obx(() => Image.network(
                           logoBaseUrl + url.value,
                           errorBuilder: (context, error, stackTrace) {
-                            // Return an error icon when the logo cannot be fetched
                             return Icon(
                               Icons.password,
                               size: 50,
@@ -69,11 +67,9 @@ class AddNewPasswordPage extends StatelessWidget {
                           },
                           loadingBuilder: (context, child, progress) {
                             if (progress == null) {
-                              // Show the logo when it loads successfully
                               return child;
                             } else {
-                              // Show a loading indicator while the logo is loading
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
@@ -316,7 +312,7 @@ class AddNewPasswordPage extends StatelessWidget {
                                   baseDomain.text,
                                   userName.text,
                                   pwd.text,
-                                  websiteLogo.value,
+                                  url.value,
                                   passwordStrength.value,
                                 );
                                 if (isSuccess) {
