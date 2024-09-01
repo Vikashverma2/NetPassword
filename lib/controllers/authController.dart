@@ -1,37 +1,50 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:googleapis_auth/auth_io.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthController extends GetxController {
-  final auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
   RxBool isLoading = false.obs;
 
-  static const _clientId =
-      "1944382428-58l2pdnrk6941an3kk5k4068dch8sjdm.apps.googleusercontent.com"; // replace with your client ID
-  static const _scopes = [
-    'https://www.googleapis.com/auth/userinfo.email',
-    'https://www.googleapis.com/auth/userinfo.profile',
-  ];
+  // Create a GoogleSignIn instance
+  final GoogleSignIn googleSignIn = GoogleSignIn(
+    scopes: [
+      'https://www.googleapis.com/auth/userinfo.email',
+      'https://www.googleapis.com/auth/userinfo.profile',
+    ],
+  );
 
   Future<void> login() async {
     isLoading.value = true;
     try {
-      final client = await _getClient();
+      // Attempt to sign in the user with Google
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
-      if (client != null) {
-        final idToken = client.credentials.idToken;
-        final accessToken = client.credentials.accessToken.data;
-        final credential = GoogleAuthProvider.credential(
-          accessToken: accessToken,
-          idToken: idToken,
-        );
-        final userCredential = await auth.signInWithCredential(credential);
-        final user = userCredential.user;
-        print('Login successful: ${user?.displayName}');
-        Get.offAllNamed("/home");
-      } else {
+      if (googleUser == null) {
+        // User canceled the login
         print('Login canceled');
+        isLoading.value = false;
+        return;
       }
+
+      // Obtain the Google authentication details
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Create a new credential
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in to Firebase with the Google user credentials
+      final UserCredential userCredential =
+          await auth.signInWithCredential(credential);
+      final User? user = userCredential.user;
+
+      print('Login successful: ${user?.displayName}');
+      Get.offAllNamed("/home");
     } catch (error) {
       print('Login error: $error');
     } finally {
@@ -41,24 +54,7 @@ class AuthController extends GetxController {
 
   Future<void> logout() async {
     await auth.signOut();
+    await googleSignIn.signOut();
     Get.offAllNamed("/auth");
-  }
-
-  Future<AutoRefreshingAuthClient?> _getClient() async {
-    try {
-      var client = await clientViaUserConsent(
-        ClientId(_clientId, ""),
-        _scopes,
-        (url) {
-          // Open the authorization URL in the browser
-          print("Please go to the following URL and grant access:");
-          print("  => $url");
-        },
-      );
-      return client;
-    } catch (e) {
-      print("Error during login: $e");
-      return null;
-    }
   }
 }
