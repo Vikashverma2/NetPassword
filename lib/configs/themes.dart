@@ -57,7 +57,7 @@ var lightTheme = ThemeData(
       ),
       labelMedium: TextStyle(
         fontFamily: "Poppins",
-        fontSize: 10,
+        fontSize: 13,
         fontWeight: FontWeight.w400,
         color: onPrimaryContainerColor,
       ),
@@ -69,7 +69,7 @@ var lightTheme = ThemeData(
       ),
       labelSmall: TextStyle(
         fontFamily: "Poppins",
-        fontSize: 13,
+        fontSize: 10,
         fontWeight: FontWeight.w400,
         color: onPrimaryContainerColor,
       ),

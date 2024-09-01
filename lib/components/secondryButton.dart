@@ -6,11 +6,14 @@ class SecondryButton extends StatelessWidget {
   final String lable;
   final VoidCallback ontap;
   final String icon;
-  const SecondryButton(
-      {super.key,
-      required this.lable,
-      required this.ontap,
-      required this.icon});
+  final Color color;
+  const SecondryButton({
+    super.key,
+    required this.lable,
+    required this.ontap,
+    required this.icon,
+    this.color = Colors.blue,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,17 +23,17 @@ class SecondryButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
         decoration: BoxDecoration(
           border: Border.all(
-            color: Theme.of(context).colorScheme.primary,
+            color: color,
           ),
           borderRadius: BorderRadius.circular(10),
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+          color: color.withOpacity(0.2),
         ),
         child: Row(
           children: [
             SvgPicture.asset(
               icon,
               width: 15,
-              color: Theme.of(context).colorScheme.primary,
+              color: color,
             ),
             SizedBox(width: 10),
             Text(
@@ -38,7 +41,7 @@ class SecondryButton extends StatelessWidget {
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w400,
-                color: Theme.of(context).colorScheme.primary,
+                color: color,
               ),
             ),
           ],

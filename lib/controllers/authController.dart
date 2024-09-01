@@ -21,12 +21,10 @@ class AuthController extends GetxController {
       if (client != null) {
         final idToken = client.credentials.idToken;
         final accessToken = client.credentials.accessToken.data;
-
         final credential = GoogleAuthProvider.credential(
           accessToken: accessToken,
           idToken: idToken,
         );
-
         final userCredential = await auth.signInWithCredential(credential);
         final user = userCredential.user;
         print('Login successful: ${user?.displayName}');

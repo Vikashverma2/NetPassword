@@ -5,10 +5,12 @@ final encrypt.IV iv = encrypt.IV.fromLength(16); // 16 bytes = 128 bits
 final encrypt.Encrypter encrypter =
     encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc));
 
+// Function to encrypt a password
 String encryptPassword(String password) {
   return encrypter.encrypt(password, iv: iv).base64;
 }
 
+// Function to decrypt a password
 String decryptPassword(String encryptedPassword) {
   return encrypter.decrypt64(encryptedPassword, iv: iv);
 }

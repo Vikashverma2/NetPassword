@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
 
@@ -18,12 +16,12 @@ class MySearchBar extends StatelessWidget {
       child: Row(
         children: [
           SvgPicture.asset(
-            IconsAssets.lock,
+            IconsAssets.search,
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Expanded(
             child: TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                   filled: false,
                   hintText: "Search your credentials",
                   border: UnderlineInputBorder(

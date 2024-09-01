@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:passwordmanager/components/myAppBar.dart';
 import 'package:passwordmanager/components/searchbar.dart';
+import 'package:passwordmanager/configs/assetsPaths.dart';
 import 'package:passwordmanager/configs/responsiveLayout.dart';
+import 'package:passwordmanager/controllers/authController.dart';
 import 'package:passwordmanager/controllers/passwordController.dart';
 import 'package:passwordmanager/models/credential.dart';
+import 'package:passwordmanager/pages/creadentialDetails/creadentialDetails.dart';
 import 'package:passwordmanager/pages/homePage/widgets/passwordTile.dart';
 
 class Homepage extends StatelessWidget {
@@ -13,7 +18,7 @@ class Homepage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isDesktop = Responsive.isDesktop(context);
     PasswordController passwordController = Get.put(PasswordController());
-
+    AuthController authController = Get.put(AuthController());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -26,64 +31,75 @@ class Homepage extends StatelessWidget {
           size: 30,
         ),
       ),
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.toNamed("/demo");
-            },
-            icon: const Icon(Icons.pages),
-          )
-        ],
-        title: const Text('Password Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          children: [
-            MySearchBar(),
-            SizedBox(height: 30),
-            Row(
-              children: [
-                Text(
-                  "All Credentials",
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: StreamBuilder<List<Credential>>(
-                stream: passwordController.getCredentialAsync(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('No credentials found'));
-                  } else {
-                    List<Credential> credentials = snapshot.data!;
-                    return ListView.builder(
-                      itemCount: credentials.length,
-                      itemBuilder: (context, index) {
-                        final credential = credentials[index];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 5),
-                          child: PasswordTile(
-                            title: credential.title!,
-                            url: credential.address!,
-                            password: credential.hasPassword!,
-                            logo: credential.siteLogo!,
-                          ),
-                        );
-                      },
-                    );
-                  }
-                },
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              MyAppBar(),
+              SizedBox(height: 10),
+              MySearchBar(),
+              SizedBox(height: 30),
+              Row(
+                children: [
+                  Text(
+                    "All Credentials",
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                ],
               ),
-            ),
-          ],
+              SizedBox(height: 10),
+              Expanded(
+                child: StreamBuilder<List<Credential>>(
+                  stream: passwordController.getCredentialAsync(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            IconsAssets.passwordTick,
+                            width: 70,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            'No credentials found',
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                        ],
+                      );
+                    } else {
+                      List<Credential> credentials = snapshot.data!;
+                      return ListView.builder(
+                        itemCount: credentials.length,
+                        itemBuilder: (context, index) {
+                          final credential = credentials[index];
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: PasswordTile(
+                              ontap: () {
+                                Get.to(CredentialDetailsPage(
+                                    credential: credential));
+                              },
+                              title: credential.title!,
+                              url: credential.address!,
+                              password: credential.hasPassword!,
+                              logo: credential.siteLogo!,
+                            ),
+                          );
+                        },
+                      );
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

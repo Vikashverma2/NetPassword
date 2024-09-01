@@ -69,4 +69,18 @@ class PasswordController extends GetxController {
             .map((doc) => Credential.fromJson(doc.data()))
             .toList());
   }
+
+  Future<void> deleteCredential(String id) async {
+    try {
+      await db
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .collection("credentials")
+          .doc(id)
+          .delete();
+      Get.rawSnackbar(message: "Credential Deleted");
+    } catch (ex) {
+      Get.rawSnackbar(message: ex.toString());
+    }
+  }
 }

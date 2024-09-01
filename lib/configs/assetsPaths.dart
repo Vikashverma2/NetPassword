@@ -10,6 +10,17 @@ class IconsAssets {
   static String madel = "$basePath/madel.svg";
   static String copy = "$basePath/copy.svg";
   static String refresh = "$basePath/regenrate.svg";
+  static String notification = "$basePath/notification.svg";
+  static String home = "$basePath/home.svg";
+  static String person = "$basePath/person.svg";
+  static String search = "$basePath/search.svg";
+  static String close = "$basePath/close.svg";
+  static String edit = "$basePath/edit.svg";
+  static String openEye = "$basePath/open_eye.svg";
+  static String closeEye = "$basePath/close_eye.svg";
+  static String text = "$basePath/text.svg";
+  static String web = "$basePath/web.svg";
+  static String delete = "$basePath/delete.svg";
 }
 
 class AnimationAssets {
