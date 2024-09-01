@@ -16,6 +16,7 @@ class PasswordTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String logoBaseUrl = "https://www.google.com/s2/favicons?sz=64&domain_url=";
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -25,12 +26,32 @@ class PasswordTile extends StatelessWidget {
       child: Row(
         children: [
           Container(
+            padding: EdgeInsets.all(15),
             width: 80,
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
               borderRadius: BorderRadius.circular(20),
             ),
             height: 80,
+            child: Image.network(
+              logoBaseUrl + logo,
+              errorBuilder: (context, error, stackTrace) {
+                return Icon(
+                  Icons.password,
+                  size: 35,
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                );
+              },
+              loadingBuilder: (context, child, progress) {
+                if (progress == null) {
+                  return child;
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
           ),
           const SizedBox(
             width: 15,
@@ -50,9 +71,12 @@ class PasswordTile extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(height: 5),
-                Text(
-                  password,
-                  style: Theme.of(context).textTheme.bodySmall,
+                const Text(
+                  "**********",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey,
+                  ),
                 ),
               ],
             ),
