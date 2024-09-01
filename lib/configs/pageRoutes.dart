@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:passwordmanager/pages/addNewPassword/addNewPassword.dart';
-import 'package:passwordmanager/pages/demo/demoPage.dart';
+import 'package:passwordmanager/demo/demoPage.dart';
 import 'package:passwordmanager/pages/splacePage/splacePage.dart';
 
 import '../pages/auth/authPage.dart';

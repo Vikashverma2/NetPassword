@@ -10,6 +10,7 @@ import 'package:passwordmanager/configs/assetsPaths.dart';
 import 'package:passwordmanager/configs/colors.dart';
 import 'package:passwordmanager/actions/getIconAsPerPwd.dart';
 import 'package:passwordmanager/actions/passwordStrenth.dart';
+import 'package:passwordmanager/controllers/passwordController.dart';
 
 import '../../actions/checkUrl.dart';
 
@@ -27,10 +28,12 @@ class AddNewPasswordPage extends StatelessWidget {
     TextEditingController pwd = TextEditingController();
     TextEditingController websiteAddress = TextEditingController();
     TextEditingController baseDomain = TextEditingController();
+    TextEditingController userName = TextEditingController();
     RxString url = "".obs;
     RxString websiteLogo = IconsAssets.lock.obs;
     String logoBaseUrl = "https://www.google.com/s2/favicons?sz=64&domain_url=";
     RxBool isUrlValid = false.obs;
+    PasswordController passwordController = Get.put(PasswordController());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -165,6 +168,7 @@ class AddNewPasswordPage extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           TextFormField(
+                            controller: userName,
                             style: const TextStyle(
                               fontSize: 20,
                             ),
@@ -295,11 +299,39 @@ class AddNewPasswordPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
-              PrimaryButton(
-                title: "Save",
-                icon: IconsAssets.lock,
-                ontap: () {},
-              )
+              Obx(
+                () => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    passwordController.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : Expanded(
+                            child: PrimaryButton(
+                              title: "Save",
+                              icon: IconsAssets.lock,
+                              ontap: () async {
+                                bool isSuccess = await passwordController
+                                    .createNewCredential(
+                                  websiteAddress.text,
+                                  baseDomain.text,
+                                  userName.text,
+                                  pwd.text,
+                                  websiteLogo.value,
+                                  passwordStrength.value,
+                                );
+                                if (isSuccess) {
+                                  websiteLogo.value = "";
+                                  websiteAddress.clear();
+                                  baseDomain.clear();
+                                  userName.clear();
+                                  pwd.clear();
+                                }
+                              },
+                            ),
+                          )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
