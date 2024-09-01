@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
 
-import 'passwordStrenth.dart';
+import '../../actions/passwordStrenth.dart';
 
 class DemoPage extends StatelessWidget {
   const DemoPage({super.key});

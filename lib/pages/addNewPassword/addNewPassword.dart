@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:passwordmanager/actions/extractBaseDomain.dart';
+import 'package:passwordmanager/actions/generatePassword.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
+import 'package:passwordmanager/components/secondryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
 import 'package:passwordmanager/configs/colors.dart';
+import 'package:passwordmanager/actions/getIconAsPerPwd.dart';
+import 'package:passwordmanager/actions/passwordStrenth.dart';
+
+import '../../actions/checkUrl.dart';
 
 class AddNewPasswordPage extends StatelessWidget {
   const AddNewPasswordPage({super.key});
@@ -12,6 +21,16 @@ class AddNewPasswordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     RxBool isHidden = false.obs;
+    RxString passwordStrength = "week".obs;
+    RxString passwordIcon = IconsAssets.lock.obs;
+    Rx<Color> strengthColor = Colors.grey.obs;
+    TextEditingController pwd = TextEditingController();
+    TextEditingController websiteAddress = TextEditingController();
+    TextEditingController baseDomain = TextEditingController();
+    RxString url = "".obs;
+    RxString websiteLogo = IconsAssets.lock.obs;
+    String logoBaseUrl = "https://www.google.com/s2/favicons?sz=64&domain_url=";
+    RxBool isUrlValid = false.obs;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
@@ -35,12 +54,29 @@ class AddNewPasswordPage extends StatelessWidget {
                     ),
                     width: 100,
                     height: 100,
-                    child: Icon(
-                      Icons.password_outlined,
-                      size: 30,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  )
+                    child: Obx(() => Image.network(
+                          logoBaseUrl + url.value,
+                          errorBuilder: (context, error, stackTrace) {
+                            // Return an error icon when the logo cannot be fetched
+                            return Icon(
+                              Icons.password,
+                              size: 50,
+                              color: Theme.of(context).colorScheme.primary,
+                            );
+                          },
+                          loadingBuilder: (context, child, progress) {
+                            if (progress == null) {
+                              // Show the logo when it loads successfully
+                              return child;
+                            } else {
+                              // Show a loading indicator while the logo is loading
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        )),
+                  ),
                 ],
               ),
               SizedBox(height: 40),
@@ -68,18 +104,27 @@ class AddNewPasswordPage extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "Enter Title",
+                                "Site Address",
                                 style: Theme.of(context).textTheme.labelLarge,
                               ),
                             ],
                           ),
                           SizedBox(height: 10),
                           TextFormField(
+                            controller: websiteAddress,
                             style: TextStyle(
                               fontSize: 20,
                             ),
+                            onChanged: (value) {
+                              isUrlValid.value = isValidUrl(value);
+                              print(isUrlValid.value);
+                              if (isUrlValid.value) {
+                                baseDomain.text = extractBaseDomain(value);
+                                url.value = extractBaseDomain(value);
+                              }
+                            },
                             decoration: InputDecoration(
-                              hintText: "Ex : Devhq",
+                              hintText: "example : www.devhq.in",
                               prefixIcon: Icon(
                                 Icons.earbuds_battery,
                                 color: Theme.of(context).colorScheme.primary,
@@ -90,18 +135,19 @@ class AddNewPasswordPage extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "Site Address",
+                                "Enter Title",
                                 style: Theme.of(context).textTheme.labelLarge,
                               ),
                             ],
                           ),
                           SizedBox(height: 10),
                           TextFormField(
+                            controller: baseDomain,
                             style: TextStyle(
                               fontSize: 20,
                             ),
                             decoration: InputDecoration(
-                              hintText: "example : www.devhq.in",
+                              hintText: "Ex : Devhq",
                               prefixIcon: Icon(
                                 Icons.earbuds_battery,
                                 color: Theme.of(context).colorScheme.primary,
@@ -119,7 +165,7 @@ class AddNewPasswordPage extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           TextFormField(
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                             ),
                             decoration: InputDecoration(
@@ -133,17 +179,33 @@ class AddNewPasswordPage extends StatelessWidget {
                           SizedBox(height: 20),
                           Row(
                             children: [
-                              Text(
-                                "Password",
-                                style: Theme.of(context).textTheme.labelLarge,
+                              Obx(
+                                () => Text(
+                                  "Password - $passwordStrength",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge
+                                      ?.copyWith(color: strengthColor.value),
+                                ),
                               ),
                             ],
                           ),
                           SizedBox(height: 10),
                           Obx(
                             () => TextFormField(
+                              controller: pwd,
+                              onChanged: (value) {
+                                passwordStrength.value =
+                                    checkPasswordStrength(value);
+                                passwordIcon.value =
+                                    getIconPathForPasswordStrength(
+                                        passwordStrength.value);
+                                strengthColor.value =
+                                    getColorForPasswordStrength(
+                                        passwordStrength.value);
+                              },
                               obscureText: isHidden.value ? true : false,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                               ),
                               decoration: InputDecoration(
@@ -153,34 +215,79 @@ class AddNewPasswordPage extends StatelessWidget {
                                     color:
                                         Theme.of(context).colorScheme.primary,
                                   ),
-                                  suffix: InkWell(
-                                    onTap: () {
-                                      isHidden.value = !isHidden.value;
-                                    },
-                                    child: Container(
-                                      padding: EdgeInsets.symmetric(
-                                          vertical: 5, horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primaryContainer,
-                                      ),
-                                      child: Text(
-                                        isHidden.value ? "Show" : "Hide",
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w400,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                  suffix: SizedBox(
+                                    width: 100,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        SvgPicture.asset(
+                                          passwordIcon.value,
+                                          color: strengthColor.value,
                                         ),
-                                      ),
+                                        const SizedBox(width: 10),
+                                        InkWell(
+                                          onTap: () {
+                                            isHidden.value = !isHidden.value;
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 5, horizontal: 10),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .primaryContainer,
+                                            ),
+                                            child: Text(
+                                              isHidden.value ? "Show" : "Hide",
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   )),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SecondryButton(
+                                lable: "Copy",
+                                ontap: () {
+                                  Clipboard.setData(
+                                      ClipboardData(text: pwd.text));
+                                },
+                                icon: IconsAssets.copy,
+                              ),
+                              const SizedBox(width: 20),
+                              SecondryButton(
+                                lable: "Generate password",
+                                ontap: () {
+                                  var value = generatePassword();
+                                  passwordStrength.value =
+                                      checkPasswordStrength(value);
+                                  passwordIcon.value =
+                                      getIconPathForPasswordStrength(
+                                          passwordStrength.value);
+                                  strengthColor.value =
+                                      getColorForPasswordStrength(
+                                          passwordStrength.value);
+                                  pwd.text = value;
+                                },
+                                icon: IconsAssets.refresh,
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 20),
                         ],
                       ),
                     )

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
-import 'package:passwordmanager/providers/authProvider.dart';
+import 'package:passwordmanager/controllers/authController.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
