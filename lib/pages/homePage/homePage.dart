@@ -87,7 +87,7 @@ class Homepage extends StatelessWidget {
                                     credential: credential));
                               },
                               title: credential.title!,
-                              url: credential.address!,
+                              url: credential.userName!,
                               password: credential.hasPassword!,
                               logo: credential.siteLogo!,
                             ),
