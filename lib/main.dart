@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:passwordmanager/configs/pageRoutes.dart';
 import 'package:passwordmanager/configs/themes.dart';
 import 'firebase_options.dart';
+import 'pages/localAuth/localAuth.dart';
 
 void main() async {
   WidgetsFlutterBinding();
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       themeMode: ThemeMode.system,
       getPages: pages,
+      // home: LocalAuthPage(),
       enableLog: true,
     );
   }

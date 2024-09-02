@@ -78,6 +78,8 @@ class PasswordController extends GetxController {
           .collection("credentials")
           .doc(id)
           .delete();
+      Get.back();
+      Get.back();
       Get.rawSnackbar(message: "Credential Deleted");
     } catch (ex) {
       Get.rawSnackbar(message: ex.toString());

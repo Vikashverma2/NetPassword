@@ -21,6 +21,8 @@ class IconsAssets {
   static String text = "$basePath/text.svg";
   static String web = "$basePath/web.svg";
   static String delete = "$basePath/delete.svg";
+  static String fingerprint = "$basePath/fingerprint.svg";
+  static String backspace = "$basePath/backspace.svg";
 }
 
 class AnimationAssets {

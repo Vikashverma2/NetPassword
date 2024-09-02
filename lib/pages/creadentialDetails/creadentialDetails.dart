@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:passwordmanager/actions/encrpytionAndDecryption.dart';
 import 'package:passwordmanager/actions/getIconAsPerPwd.dart';
 import 'package:passwordmanager/components/myIconButton.dart';
@@ -28,6 +29,24 @@ class CredentialDetailsPage extends StatelessWidget {
     RxString password = credential.hasPassword!.obs;
     RxBool isHide = true.obs;
     PasswordController passwordController = Get.put(PasswordController());
+    final LocalAuthentication auth = LocalAuthentication();
+
+    void showPassword() async {
+      final bool canAuthenticateWithBio = await auth.canCheckBiometrics;
+      if (canAuthenticateWithBio) {
+        final bool didAuthenicate = await auth.authenticate(
+          localizedReason: "Please authenticate",
+          options: AuthenticationOptions(
+            biometricOnly: false,
+          ),
+        );
+        if (didAuthenicate) {
+          password.value = decryptPassword(credential.hasPassword!);
+          isHide.value = !isHide.value;
+        }
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(credential.title!),
@@ -140,8 +159,7 @@ class CredentialDetailsPage extends StatelessWidget {
                 Obx(
                   () => MyIconButton(
                     ontap: () {
-                      password.value = decryptPassword(credential.hasPassword!);
-                      isHide.value = !isHide.value;
+                      showPassword();
                     },
                     icon: isHide.value
                         ? IconsAssets.openEye
@@ -256,8 +274,6 @@ class CredentialDetailsPage extends StatelessWidget {
                                   ontap: () {
                                     passwordController
                                         .deleteCredential(credential.id!);
-                                    Get.back();
-                                    Get.back();
                                   },
                                   icon: IconsAssets.delete,
                                 ),
