@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:passwordmanager/components/localAuthKey.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
-import 'package:passwordmanager/configs/colors.dart';
 
 class LocalAuthPage extends StatelessWidget {
   const LocalAuthPage({super.key});
@@ -14,6 +13,7 @@ class LocalAuthPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final LocalAuthentication _auth = LocalAuthentication();
     final w = MediaQuery.of(context).size.width;
+    String existingPin = "7033";
     RxString pin = "".obs;
 
     void addDigit(String digit) {
@@ -21,8 +21,12 @@ class LocalAuthPage extends StatelessWidget {
         // Limiting the pin to 4 digits
         pin.value += digit;
       }
-      HapticFeedback
-          .lightImpact(); // Light haptic feedback on every button click
+      HapticFeedback.lightImpact();
+
+      if (pin.value == existingPin) {
+        print("Authenticated");
+        Get.offAllNamed("/home");
+      }
     }
 
     void deleteLastDigit() {
@@ -33,34 +37,55 @@ class LocalAuthPage extends StatelessWidget {
           .lightImpact(); // Light haptic feedback on every button click
     }
 
+    void authenticateWithDevice() async {
+      final bool canAuthenticateWithBiometrics = await _auth.canCheckBiometrics;
+      if (canAuthenticateWithBiometrics) {
+        try {
+          final bool didAuthenticate = await _auth.authenticate(
+            localizedReason: 'Please authenticate to show account balance',
+            options: const AuthenticationOptions(
+              biometricOnly: false,
+              sensitiveTransaction: true,
+            ),
+          );
+          if (didAuthenticate) {
+            Get.offAllNamed("/home");
+          }
+        } catch (ex) {
+          print(ex);
+        }
+      }
+    }
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Row(),
             SvgPicture.asset(
               IconsAssets.lock,
               width: 60,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 40),
             Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(4, (index) {
                     return Container(
                       width: 20,
                       height: 20,
-                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                         color: index < pin.value.length
-                            ? Colors.black
+                            ? Colors.blue
                             : Colors.grey,
                         borderRadius: BorderRadius.circular(100),
                       ),
                     );
                   }),
                 )),
+            SizedBox(height: 10),
+            Text("Please enter 4 digit pin"),
             SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -181,6 +206,7 @@ class LocalAuthPage extends StatelessWidget {
                   ),
                   width: w,
                   ontap: () {
+                    authenticateWithDevice();
                     HapticFeedback
                         .lightImpact(); // Light haptic feedback on fingerprint tap
                     // Trigger fingerprint authentication
