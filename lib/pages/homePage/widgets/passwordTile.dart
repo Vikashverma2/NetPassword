@@ -23,7 +23,7 @@ class PasswordTile extends StatelessWidget {
     return InkWell(
       onTap: ontap,
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Theme.of(context).colorScheme.primaryContainer,
@@ -31,7 +31,7 @@ class PasswordTile extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               width: 80,
               decoration: BoxDecoration(
                 color: lightBlueColor,
@@ -70,12 +70,12 @@ class PasswordTile extends StatelessWidget {
                     title,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Text(
                     url,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   const Text(
                     "**********",
                     style: TextStyle(

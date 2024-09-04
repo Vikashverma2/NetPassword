@@ -11,31 +11,31 @@ import '../pages/splacePage/splacePage.dart';
 var pages = [
   GetPage(
     name: "/",
-    page: () => SplacePage(),
+    page: () => const SplacePage(),
     middlewares: [AuthMiddleware()],
   ),
   GetPage(
     name: "/home",
-    page: () => Homepage(),
+    page: () => const Homepage(),
     middlewares: [AuthMiddleware()],
   ),
   GetPage(
     name: "/local-auth",
-    page: () => LocalAuthPage(),
+    page: () => const LocalAuthPage(),
     middlewares: [AuthMiddleware()],
   ),
   GetPage(
     name: "/auth",
-    page: () => AuthPage(),
+    page: () => const AuthPage(),
   ),
   GetPage(
     name: "/demo",
-    page: () => DemoPage(),
+    page: () => const DemoPage(),
     middlewares: [AuthMiddleware()],
   ),
   GetPage(
     name: "/addnewpassword",
-    page: () => AddNewPasswordPage(),
+    page: () => const AddNewPasswordPage(),
     middlewares: [AuthMiddleware()],
   ),
 ];

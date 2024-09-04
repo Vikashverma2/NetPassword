@@ -5,58 +5,15 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:passwordmanager/components/localAuthKey.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
+import 'package:passwordmanager/controllers/localAuthController.dart';
 
 class LocalAuthPage extends StatelessWidget {
   const LocalAuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final LocalAuthentication _auth = LocalAuthentication();
     final w = MediaQuery.of(context).size.width;
-    String existingPin = "7033";
-    RxString pin = "".obs;
-
-    void addDigit(String digit) {
-      if (pin.value.length < 4) {
-        // Limiting the pin to 4 digits
-        pin.value += digit;
-      }
-      HapticFeedback.lightImpact();
-
-      if (pin.value == existingPin) {
-        print("Authenticated");
-        Get.offAllNamed("/home");
-      }
-    }
-
-    void deleteLastDigit() {
-      if (pin.value.isNotEmpty) {
-        pin.value = pin.value.substring(0, pin.value.length - 1);
-      }
-      HapticFeedback
-          .lightImpact(); // Light haptic feedback on every button click
-    }
-
-    void authenticateWithDevice() async {
-      final bool canAuthenticateWithBiometrics = await _auth.canCheckBiometrics;
-      if (canAuthenticateWithBiometrics) {
-        try {
-          final bool didAuthenticate = await _auth.authenticate(
-            localizedReason: 'Please authenticate to show account balance',
-            options: const AuthenticationOptions(
-              biometricOnly: false,
-              sensitiveTransaction: true,
-            ),
-          );
-          if (didAuthenticate) {
-            Get.offAllNamed("/home");
-          }
-        } catch (ex) {
-          print(ex);
-        }
-      }
-    }
-
+    LocalAuthController authController = Get.put(LocalAuthController());
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(30),
@@ -67,7 +24,7 @@ class LocalAuthPage extends StatelessWidget {
               IconsAssets.lock,
               width: 60,
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Obx(() => Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(4, (index) {
@@ -76,7 +33,7 @@ class LocalAuthPage extends StatelessWidget {
                       height: 20,
                       margin: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
-                        color: index < pin.value.length
+                        color: index < authController.pin.value.length
                             ? Colors.blue
                             : Colors.grey,
                         borderRadius: BorderRadius.circular(100),
@@ -84,9 +41,9 @@ class LocalAuthPage extends StatelessWidget {
                     );
                   }),
                 )),
-            SizedBox(height: 10),
-            Text("Please enter 4 digit pin"),
-            SizedBox(height: 40),
+            const SizedBox(height: 10),
+            const Text("Please enter 4 digit pin"),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -98,7 +55,7 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("1"),
+                  ontap: () => authController.addDigit("1"),
                 ),
                 AuthKey(
                   text: Text(
@@ -108,7 +65,7 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("2"),
+                  ontap: () => authController.addDigit("2"),
                 ),
                 AuthKey(
                   text: Text(
@@ -118,11 +75,11 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("3"),
+                  ontap: () => authController.addDigit("3"),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -134,7 +91,7 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("4"),
+                  ontap: () => authController.addDigit("4"),
                 ),
                 AuthKey(
                   text: Text(
@@ -144,7 +101,7 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("5"),
+                  ontap: () => authController.addDigit("5"),
                 ),
                 AuthKey(
                   text: Text(
@@ -154,11 +111,11 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("6"),
+                  ontap: () => authController.addDigit("6"),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -170,7 +127,7 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("7"),
+                  ontap: () => authController.addDigit("7"),
                 ),
                 AuthKey(
                   text: Text(
@@ -180,7 +137,7 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("8"),
+                  ontap: () => authController.addDigit("8"),
                 ),
                 AuthKey(
                   text: Text(
@@ -190,11 +147,11 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("9"),
+                  ontap: () => authController.addDigit("9"),
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -206,7 +163,7 @@ class LocalAuthPage extends StatelessWidget {
                   ),
                   width: w,
                   ontap: () {
-                    authenticateWithDevice();
+                    authController.authenticateWithDevice();
                     HapticFeedback
                         .lightImpact(); // Light haptic feedback on fingerprint tap
                     // Trigger fingerprint authentication
@@ -220,7 +177,7 @@ class LocalAuthPage extends StatelessWidget {
                     ),
                   ),
                   width: w,
-                  ontap: () => addDigit("0"),
+                  ontap: () => authController.addDigit("0"),
                 ),
                 AuthKey(
                   text: SvgPicture.asset(
@@ -229,7 +186,7 @@ class LocalAuthPage extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   width: w,
-                  ontap: deleteLastDigit,
+                  ontap: authController.deleteLastDigit,
                 ),
               ],
             ),

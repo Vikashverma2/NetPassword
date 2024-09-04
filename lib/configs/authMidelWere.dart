@@ -9,7 +9,7 @@ class AuthMiddleware extends GetMiddleware {
     final isLogin = auth.currentUser != null;
 
     if (!isLogin && route != '/auth') {
-      return RouteSettings(name: '/auth');
+      return const RouteSettings(name: '/auth');
     }
     return null;
   }

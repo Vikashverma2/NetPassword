@@ -1,5 +1,6 @@
 import 'package:bcrypt/bcrypt.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:passwordmanager/actions/checkPasswordLeaked.dart';
@@ -17,6 +18,15 @@ class DemoPage extends StatelessWidget {
     RxString hashedPassword = "week".obs;
     RxString decryptedPasswordText = "".obs;
     RxString encryptedPasswordText = "".obs;
+    Future<void> storeData() async {
+      AndroidOptions getAndroidOptions() => const AndroidOptions(
+            encryptedSharedPreferences: true,
+          );
+      final storage = FlutterSecureStorage(aOptions: getAndroidOptions());
+      await storage.write(key: "localAuth", value: pwd.text);
+      String? value = await storage.read(key: "localAuth");
+      encryptedPasswordText.value = value!;
+    }
 
     return Scaffold(
       appBar: AppBar(),
@@ -38,9 +48,7 @@ class DemoPage extends StatelessWidget {
               title: "Encrypt and Decrypt",
               icon: IconsAssets.lock,
               ontap: () async {
-                encryptedPasswordText.value = encryptPassword(pwd.text);
-                decryptedPasswordText.value =
-                    decryptPassword(encryptedPasswordText.value);
+                await storeData();
               },
             ),
           ],

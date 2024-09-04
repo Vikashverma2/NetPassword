@@ -36,7 +36,7 @@ class MyAppBar extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Get.to(DemoPage());
+            Get.to(const DemoPage());
           },
           child: Container(
             decoration: BoxDecoration(

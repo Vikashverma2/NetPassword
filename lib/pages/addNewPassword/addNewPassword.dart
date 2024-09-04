@@ -36,7 +36,7 @@ class AddNewPasswordPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        title: Text("Add New Passowrd"),
+        title: const Text("Add New Passowrd"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -78,9 +78,9 @@ class AddNewPasswordPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Container(
-                padding: EdgeInsets.all(15),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).colorScheme.primaryContainer,
@@ -99,7 +99,7 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 30),
+                          const SizedBox(height: 30),
                           Row(
                             children: [
                               Text(
@@ -108,10 +108,10 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextFormField(
                             controller: websiteAddress,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                             ),
                             onChanged: (value) {
@@ -130,7 +130,7 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Row(
                             children: [
                               Text(
@@ -139,10 +139,10 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextFormField(
                             controller: baseDomain,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                             ),
                             decoration: InputDecoration(
@@ -153,7 +153,7 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Row(
                             children: [
                               Text(
@@ -162,7 +162,7 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           TextFormField(
                             controller: userName,
                             style: const TextStyle(
@@ -176,7 +176,7 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Row(
                             children: [
                               Obx(
@@ -190,7 +190,7 @@ class AddNewPasswordPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Obx(
                             () => TextFormField(
                               controller: pwd,
@@ -294,7 +294,7 @@ class AddNewPasswordPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Obx(
                 () => Row(
                   mainAxisAlignment: MainAxisAlignment.center,

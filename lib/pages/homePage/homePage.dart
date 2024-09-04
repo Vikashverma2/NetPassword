@@ -36,10 +36,10 @@ class Homepage extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              MyAppBar(),
-              SizedBox(height: 10),
-              MySearchBar(),
-              SizedBox(height: 30),
+              const MyAppBar(),
+              const SizedBox(height: 10),
+              const MySearchBar(),
+              const SizedBox(height: 30),
               Row(
                 children: [
                   Text(
@@ -48,7 +48,7 @@ class Homepage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Expanded(
                 child: StreamBuilder<List<Credential>>(
                   stream: passwordController.getCredentialAsync(),
@@ -66,7 +66,7 @@ class Homepage extends StatelessWidget {
                             width: 70,
                             color: Colors.grey,
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Text(
                             'No credentials found',
                             style: Theme.of(context).textTheme.labelLarge,

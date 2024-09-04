@@ -9,7 +9,7 @@ import '../actions/encrpytionAndDecryption.dart';
 class PasswordController extends GetxController {
   final auth = FirebaseAuth.instance;
   final db = FirebaseFirestore.instance;
-  final uuid = Uuid();
+  final uuid = const Uuid();
   RxBool isLoading = false.obs;
   RxString errorText = "".obs;
   Future<bool> createNewCredential(

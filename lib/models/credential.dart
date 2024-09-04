@@ -66,19 +66,19 @@ class Credential {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["address"] = address;
-    _data["title"] = title;
-    _data["userName"] = userName;
-    _data["hasPassword"] = hasPassword;
-    _data["passwordStrength"] = passwordStrength;
-    _data["isLeaked"] = isLeaked;
-    _data["createdAt"] = createdAt;
-    _data["updatedAt"] = updatedAt;
-    _data["siteLogo"] = siteLogo;
-    _data["email"] = email;
-    _data["note"] = note;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["address"] = address;
+    data["title"] = title;
+    data["userName"] = userName;
+    data["hasPassword"] = hasPassword;
+    data["passwordStrength"] = passwordStrength;
+    data["isLeaked"] = isLeaked;
+    data["createdAt"] = createdAt;
+    data["updatedAt"] = updatedAt;
+    data["siteLogo"] = siteLogo;
+    data["email"] = email;
+    data["note"] = note;
+    return data;
   }
 }

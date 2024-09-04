@@ -36,7 +36,7 @@ class CredentialDetailsPage extends StatelessWidget {
       if (canAuthenticateWithBio) {
         final bool didAuthenicate = await auth.authenticate(
           localizedReason: "Please authenticate",
-          options: AuthenticationOptions(
+          options: const AuthenticationOptions(
             biometricOnly: false,
           ),
         );
@@ -55,14 +55,14 @@ class CredentialDetailsPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Column(
                   children: [
                     Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(100),
                           color: Theme.of(context)
@@ -91,7 +91,7 @@ class CredentialDetailsPage extends StatelessWidget {
                             }
                           },
                         )),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
                       credential.title!,
                       style: Theme.of(context).textTheme.bodyLarge,
@@ -100,14 +100,14 @@ class CredentialDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Row(
               children: [
                 SvgPicture.asset(
                   IconsAssets.person,
                   color: Colors.grey,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,14 +123,14 @@ class CredentialDetailsPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 SvgPicture.asset(
                   IconsAssets.lock,
                   color: Colors.grey,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,7 +155,7 @@ class CredentialDetailsPage extends StatelessWidget {
                   },
                   icon: IconsAssets.copy,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Obx(
                   () => MyIconButton(
                     ontap: () {
@@ -168,14 +168,14 @@ class CredentialDetailsPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 SvgPicture.asset(
                   icon,
                   color: color,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,14 +193,14 @@ class CredentialDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 SvgPicture.asset(
                   IconsAssets.web,
                   color: Colors.grey,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,14 +218,14 @@ class CredentialDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               children: [
                 SvgPicture.asset(
                   IconsAssets.text,
                   color: Colors.grey,
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,7 +243,7 @@ class CredentialDetailsPage extends StatelessWidget {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -302,7 +302,7 @@ class CredentialDetailsPage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 30)
+            const SizedBox(height: 30)
           ],
         ),
       ),

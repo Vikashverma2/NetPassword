@@ -47,17 +47,17 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["userid"] = userid;
-    _data["name"] = name;
-    _data["email"] = email;
-    _data["phone"] = phone;
-    _data["profileUrl"] = profileUrl;
-    _data["pin"] = pin;
-    _data["isPasswordEnable"] = isPasswordEnable;
-    _data["pinType"] = pinType;
-    _data["recoveryKey"] = recoveryKey;
-    return _data;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data["id"] = id;
+    data["userid"] = userid;
+    data["name"] = name;
+    data["email"] = email;
+    data["phone"] = phone;
+    data["profileUrl"] = profileUrl;
+    data["pin"] = pin;
+    data["isPasswordEnable"] = isPasswordEnable;
+    data["pinType"] = pinType;
+    data["recoveryKey"] = recoveryKey;
+    return data;
   }
 }

@@ -38,8 +38,9 @@ String checkPasswordStrength(String password) {
 
   // Avoid keyboard patterns (e.g., "qwerty", "asdfgh")
   if (!password.contains(
-      RegExp(r'qwerty|asdfgh|zxcvbn|1q2w3e4r|!@#\$%^&*', caseSensitive: false)))
+      RegExp(r'qwerty|asdfgh|zxcvbn|1q2w3e4r|!@#\$%^&*', caseSensitive: false))) {
     score++;
+  }
 
   // Bonus: Check entropy (measure of unpredictability)
   double entropy = calculateEntropy(password);

@@ -12,7 +12,7 @@ class SplaceHandler extends GetxController {
   }
 
   Future<void> handleSplace() async {
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () {
       if (auth.currentUser != null) {
         Get.offAllNamed("/local-auth");
       } else {

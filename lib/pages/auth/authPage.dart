@@ -38,14 +38,14 @@ class AuthPage extends StatelessWidget {
                 // ),
               ],
             ),
-            SizedBox(height: 70),
+            const SizedBox(height: 70),
             Column(
               children: [
                 Text(
                   "Trusted and secure",
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   "Your passwords are protected with high-level security",
                   textAlign: TextAlign.center,
@@ -53,12 +53,12 @@ class AuthPage extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Obx(() => authController.isLoading.value
-                    ? CircularProgressIndicator()
+                    ? const CircularProgressIndicator()
                     : PrimaryButton(
                         title: "Log In",
                         icon: IconsAssets.lock,

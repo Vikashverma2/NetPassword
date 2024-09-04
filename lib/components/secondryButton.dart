@@ -35,7 +35,7 @@ class SecondryButton extends StatelessWidget {
               width: 15,
               color: color,
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               lable,
               style: TextStyle(
