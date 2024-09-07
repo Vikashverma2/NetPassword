@@ -9,7 +9,6 @@ import 'package:passwordmanager/components/myIconButton.dart';
 import 'package:passwordmanager/components/secondryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
 import 'package:passwordmanager/configs/notification.dart';
-import 'package:passwordmanager/controllers/authController.dart';
 import 'package:passwordmanager/controllers/passwordController.dart';
 import 'package:passwordmanager/models/credential.dart';
 

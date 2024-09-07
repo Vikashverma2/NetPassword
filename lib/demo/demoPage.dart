@@ -1,10 +1,6 @@
-import 'package:bcrypt/bcrypt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:encrypt/encrypt.dart' as encrypt;
-import 'package:passwordmanager/actions/checkPasswordLeaked.dart';
-import 'package:passwordmanager/actions/encrpytionAndDecryption.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
 

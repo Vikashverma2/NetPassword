@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:passwordmanager/components/primaryButton.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
-import 'package:passwordmanager/controllers/authController.dart';
+
+import '../../controllers/authController.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -38,14 +38,14 @@ class AuthPage extends StatelessWidget {
                 // ),
               ],
             ),
-            const SizedBox(height: 70),
+            SizedBox(height: 70),
             Column(
               children: [
                 Text(
                   "Trusted and secure",
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 Text(
                   "Your passwords are protected with high-level security",
                   textAlign: TextAlign.center,
@@ -53,12 +53,12 @@ class AuthPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 50),
+            SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Obx(() => authController.isLoading.value
-                    ? const CircularProgressIndicator()
+                    ? CircularProgressIndicator()
                     : PrimaryButton(
                         title: "Log In",
                         icon: IconsAssets.lock,

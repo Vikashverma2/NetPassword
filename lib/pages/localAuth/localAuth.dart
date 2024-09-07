@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // Import this for HapticFeedback
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:local_auth/local_auth.dart';
 import 'package:passwordmanager/components/localAuthKey.dart';
 import 'package:passwordmanager/configs/assetsPaths.dart';
 import 'package:passwordmanager/controllers/localAuthController.dart';
