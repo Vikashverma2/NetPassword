@@ -1,5 +1,4 @@
-
-class User {
+class UserModel {
   String? id;
   String? userid;
   String? name;
@@ -7,41 +6,51 @@ class User {
   String? phone;
   String? profileUrl;
   String? pin;
-  String? isPasswordEnable;
+  bool? isPasswordEnable;
   String? pinType;
   String? recoveryKey;
 
-  User({this.id, this.userid, this.name, this.email, this.phone, this.profileUrl, this.pin, this.isPasswordEnable, this.pinType, this.recoveryKey});
+  UserModel(
+      {this.id,
+      this.userid,
+      this.name,
+      this.email,
+      this.phone,
+      this.profileUrl,
+      this.pin,
+      this.isPasswordEnable,
+      this.pinType,
+      this.recoveryKey});
 
-  User.fromJson(Map<String, dynamic> json) {
-    if(json["id"] is String) {
+  UserModel.fromJson(Map<String, dynamic> json) {
+    if (json["id"] is String) {
       id = json["id"];
     }
-    if(json["userid"] is String) {
+    if (json["userid"] is String) {
       userid = json["userid"];
     }
-    if(json["name"] is String) {
+    if (json["name"] is String) {
       name = json["name"];
     }
-    if(json["email"] is String) {
+    if (json["email"] is String) {
       email = json["email"];
     }
-    if(json["phone"] is String) {
+    if (json["phone"] is String) {
       phone = json["phone"];
     }
-    if(json["profileUrl"] is String) {
+    if (json["profileUrl"] is String) {
       profileUrl = json["profileUrl"];
     }
-    if(json["pin"] is String) {
+    if (json["pin"] is String) {
       pin = json["pin"];
     }
-    if(json["isPasswordEnable"] is String) {
+    if (json["isPasswordEnable"] is bool) {
       isPasswordEnable = json["isPasswordEnable"];
     }
-    if(json["pinType"] is String) {
+    if (json["pinType"] is String) {
       pinType = json["pinType"];
     }
-    if(json["recoveryKey"] is String) {
+    if (json["recoveryKey"] is String) {
       recoveryKey = json["recoveryKey"];
     }
   }

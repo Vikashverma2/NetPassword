@@ -204,6 +204,13 @@ class UserProfilePage extends StatelessWidget {
                 },
                 leading: SvgPicture.asset(IconsAssets.device),
                 title: Text("Link Device"),
+              ),
+              ListTile(
+                onTap: () {
+                  authController.logout();
+                },
+                leading: SvgPicture.asset(IconsAssets.close),
+                title: Text("Logout"),
               )
             ],
           ),

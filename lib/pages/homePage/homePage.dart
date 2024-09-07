@@ -16,9 +16,7 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDesktop = Responsive.isDesktop(context);
     PasswordController passwordController = Get.put(PasswordController());
-    AuthController authController = Get.put(AuthController());
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
