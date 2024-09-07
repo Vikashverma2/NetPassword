@@ -15,23 +15,30 @@ class MyAppBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 50,
-              height: 50,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child:
-                    Image.network(authController.auth.currentUser!.photoURL!),
+        InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          onTap: () {
+            Get.toNamed("/profile");
+          },
+          child: Row(
+            children: [
+              SizedBox(
+                width: 50,
+                height: 50,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child:
+                      Image.network(authController.auth.currentUser!.photoURL!),
+                ),
               ),
-            ),
-            const SizedBox(width: 10),
-            Text(
-              authController.auth.currentUser!.displayName!,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-          ],
+              const SizedBox(width: 10),
+              Text(
+                authController.auth.currentUser!.displayName!,
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          ),
         ),
         InkWell(
           onTap: () {

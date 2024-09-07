@@ -23,6 +23,7 @@ class IconsAssets {
   static String delete = "$basePath/delete.svg";
   static String fingerprint = "$basePath/fingerprint.svg";
   static String backspace = "$basePath/backspace.svg";
+  static String device = "$basePath/device.svg";
 }
 
 class AnimationAssets {
